@@ -12,5 +12,8 @@
 </head>
 <body>
 ${message}
+<br>
+<h1>This is where the JSON Array starts</h1>
+${jsonArray}
 </body>
 </html>

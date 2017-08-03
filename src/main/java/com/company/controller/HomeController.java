@@ -1,11 +1,13 @@
 package com.company.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -49,6 +51,22 @@ public class HomeController {
 
             // this is for me as a developer to identify that my API is working
             System.out.println("Response code: " + resp.getStatusLine().getStatusCode());
+
+            //String to hold data for our loop once we return the json array
+
+            String text = "";
+
+            //create a json array to hold the data in the "text" array node
+            //also think of this as the json array has an array of text nested inside of the data object
+
+            JSONArray ar = json.getJSONObject("data").getJSONArray("text");
+
+            //loop through json array
+            for (int i = 0; i < ar.length(); i++) {
+                text+=("<h6>" + ar.getString(i) + "</h6>");
+            }
+
+          model.addAttribute("jsonArray", text);
 
         } catch (IOException e) {
             e.printStackTrace();
